@@ -90,18 +90,16 @@ var DropList = Class.$factory('droplist', {
         self.$list.is(':visible') ? self.close() : self.open();
     },
 
-    setList: function(list, defaultValue, defaultKey, multiple){
+    setList: function(list, defaultValue, defaultKey){
         var self = this, $dom;
 
         if(list.nodeType || list instanceof $ || typeof list == 'string'){
             $dom = $(list);
             list = self.dom2list(list);
-            multiple = !!$dom.attr('multiple');
         }
 
 
-        multiple ? self.$list.addClass('ui3-droplist-multiple') : self.$list.removeClass('ui3-droplist-multiple');
-        self.$list.html(DropList.createListHtml(list, multiple));
+        self.$list.html(DropList.createListHtml(list));
         self.setSize();
 
         if(self.$dom && (!$dom || $dom.get(0) !== self.$dom.get(0))){
@@ -195,7 +193,7 @@ var DropList = Class.$factory('droplist', {
     }
 });
 
-DropList.createListHtml = function(list, multiple){
+DropList.createListHtml = function(list){
     var html = [];
 
     $.each(list, function(key, item){
